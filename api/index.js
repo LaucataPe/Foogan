@@ -26,10 +26,12 @@
 //    console.log('%s listening at 3001'); // eslint-disable-line no-console
 //  });
 //});
+const server = require('./src/app')
+const {conn} = require('./src/db')
 
-const server = require('./src/app.js')
-const PORT = 3001;
-
-server.listen(PORT, () => {
-   console.log('Server raised in port: ' + PORT);
-});
+conn.sync({force: true}).then(() =>{
+    console.log('Database connected, master');
+    server.listen(3001, () =>{
+        console.log('Server on port: 3001');
+    })
+})
