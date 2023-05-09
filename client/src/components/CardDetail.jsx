@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function CardDetail() {
     const { id } = useParams();
-     const [recipe, setRecipe] = useState({});
+    const [recipe, setRecipe] = useState({});
 
     useEffect(() =>{
         const getRecipe = async(id) =>{
@@ -17,15 +17,28 @@ function CardDetail() {
                 console.log(error)  
             }
         }
-
         getRecipe(id)
-    })
+    },[id])
 
 
+
+    console.log(recipe);
     return(
         <>
         <h1>Detail</h1>
+        <span>#{recipe.id}</span>
         <h2>{recipe.title}</h2>
+        <p>{recipe.summary}</p>
+        <h5>{recipe.healthScore}</h5>
+        {Object.keys(recipe).length > 0 ? recipe.diets.map((diet) => (
+            <h3>{diet}</h3>
+        )):''}
+        {Object.keys(recipe).length > 0 ? 
+            recipe.steps[0].steps.map((step) => (
+            <h3>{step.number}{step.step}</h3>
+        )):''}
+        <img src={recipe.image} alt={recipe.title} />
+
         <Link to='/home'><button>Home</button></Link>
         </>
     )

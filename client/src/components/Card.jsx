@@ -9,7 +9,7 @@ function Card({recipes, loding}) {
         {recipes.map( recipe =>(
             <div key={recipe.id}>
                 <h3>{recipe.title}</h3>
-                <img src="#" alt={recipe.title}/>
+                <img src={recipe.image} alt={recipe.title}/>
                 <Link to={`/detail/${recipe.id}`}><button>+</button></Link>
             </div>
         ))}

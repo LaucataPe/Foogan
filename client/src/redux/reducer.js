@@ -1,7 +1,8 @@
-import {GET_RECIPES} from "./action_types"
+import {GET_RECIPES, FILTER, ORDER} from "./action_types"
 
 const initialState = {
     recipes: [],
+    allRecipes: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,13 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
+            }
+        case ORDER:
+            const {by, js} = action.payload
+            const orderRecipes = [...state.recipes]
+            return {
+                ...state,
+
             }
         default:
             return {...state}
