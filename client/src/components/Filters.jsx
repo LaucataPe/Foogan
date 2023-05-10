@@ -47,7 +47,7 @@ function Filters() {
         </select>
 
         <p>Order By</p>
-        <select name="order"  onChange={max=lol}>
+        <select name="order" >
             <option value="name">Name</option>
             <option value="score">Health Score</option>
         </select>
