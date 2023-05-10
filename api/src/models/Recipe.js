@@ -28,6 +28,14 @@ module.exports = (sequelize) => {
     steps:{
       type: DataTypes.TEXT,
       allowNull: false
-    }
+    },
+    database: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return true;
+      },
+    },
+  },{
+    timestamps: false,
   });
 };
