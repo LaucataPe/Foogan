@@ -8,6 +8,7 @@ const createRecipe = async (req, res) =>{
         const newRecipe = await Recipe.create({
             title, image, summary, healthScore, steps, diets
         })
+        console.log(newRecipe);
         await newRecipe.addDiets(diets);
         res.status(200).json(newRecipe)
     } catch (error) {

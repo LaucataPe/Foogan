@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function CardDetail() {
-    const { id } = useParams();
+    const { id} = useParams();
+    const {search} = useLocation();
+    console.log(search.toString());
     const [recipe, setRecipe] = useState({});
+
+    
 
     useEffect(() =>{
         const getRecipe = async(id) =>{
@@ -35,7 +39,7 @@ function CardDetail() {
         )):''}
         {Object.keys(recipe).length > 0 ? 
             recipe.steps[0].steps.map((step) => (
-            <p key={step.number}>{step.number}{step.step}</p>
+            <p key={step.number}>{step.number}. {step.step}</p>
         )):''}
         <img src={recipe.image} alt={recipe.title} />
 

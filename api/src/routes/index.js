@@ -6,12 +6,10 @@ const router = express.Router()
 const {getAllRecipes} = require('../controllers/getAllRecipes')
 const {getOneRecipe} = require('../controllers/getOneRecipe')
 const {createRecipe} = require('../controllers/createRecipe')
-//const {searchRecipe} = require('../controllers/searchRecipe')
 
 router.get('/recipes', getAllRecipes)
 router.get('/recipe/:id', getOneRecipe)
-//router.get('/recipes/name', searchRecipe)
-router.post('/recipes', createRecipe)
+router.post('/create', createRecipe)
 
 
 module.exports = {router}

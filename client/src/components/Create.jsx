@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-//import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 //import Steps from './Steps';
 import validate from './validation';
-import {createRecipe} from '../redux/actions'
-import { useDispatch} from 'react-redux'
 
 
 function Create() {
@@ -12,12 +11,11 @@ function Create() {
         summary: '',
         healthScore: 0,
         image: '',
-        diets: [],
         steps: []
     })
     const [inputValue, setInputValue] = useState('');
     const [errors, setErrors] = useState({})
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
 
     const handleInputs = (event) =>{
         setInput({...input, 
@@ -57,17 +55,26 @@ function Create() {
         })) 
       };
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
     
         if (Object.keys(errors).length === 0) {
-            dispatch(createRecipe(input))
+            try {
+                let response = await axios.post(`http://localhost:3001/food/create`, input);
+                let data = response.data;
+
+                if(data){
+                    navigate('/home')
+                    return alert('Your recipe was created')
+                } 
+             } catch (error) {
+              console.log(error);  
+             }
             setInput({
                 title: '',
                 summary: '',
                 healthScore: 0,
                 image: '',
-                diets: [],
                 steps: []
             })
         }else{
@@ -96,33 +103,7 @@ function Create() {
             {errors.image !== '' ? <p><strong>{errors.image}</strong></p> : <p></p> }
 
 
-            {/* Diets */}
-            <label>Select Diets</label><br />
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="gluten free" />
-            <img src="#" alt="Gluten Free"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="ketogenic"/>
-            <img src="#" alt="Ketogenic"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="vegetarian"/>
-            <img src="#" alt="Vegetarian"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="lacto-vegetarian"/>
-            <img src="#" alt="Lacto-Vegetarian"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="pescetarian"/>
-            <img src="#" alt="Pescetarian"/>
-            </label>
-            <label>
-            <input onClick={handleDiet} type="checkbox" name="diets" value="vegan"/>
-            <img src="#" alt="Vegan"/>
-            </label>
-            {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
+            
 
             {/* Steps */}
             <div>

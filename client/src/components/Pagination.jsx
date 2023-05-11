@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from './Card'
 
 function Pagination({recipes, loading}) {
+
     const [currentPage, setCurrentPage] = useState(1)
     const [perPage, setperPage] = useState(9)
+    const [find, setFind] = useState()
+
+    useEffect(() => {
+       setCurrentPage(1)
+       if(recipes.length === 0)setFind(false)
+       if(recipes.length > 0)setFind(true)
+    }, [recipes])
 
     //console.log(recipes);
     const pagesNumber = Math.ceil((recipes.length)/perPage)
@@ -28,6 +36,7 @@ function Pagination({recipes, loading}) {
 
     return(
         <>
+        {find === false ? <h1>Che, no hay recetas así!</h1> : ''}
         <Card recipes={currentRecipes} loading={loading}/>
         <div className='pagination'>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>First</button>
