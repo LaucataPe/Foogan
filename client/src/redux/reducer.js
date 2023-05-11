@@ -1,4 +1,4 @@
-import {GET_RECIPES, FILTER, ORDER} from "./action_types"
+import {GET_RECIPES, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS} from "./action_types"
 
 const initialState = {
     recipes: [],
@@ -11,13 +11,33 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
+                allRecipes: action.payload
             }
-        case ORDER:
-            const {by, js} = action.payload
-            const orderRecipes = [...state.recipes]
+        case SEARCH_RECIPE:
             return {
                 ...state,
-
+                recipes: action.payload,
+            }
+        case FILTER_ORIGIN:
+            let filter;
+            if(action.payload === 'db'){
+                filter = state.recipes.filter((recipe) => recipe.database)
+            }else if(action.payload === 'api'){
+                filter = state.recipes.filter((recipe) => !recipe.database)
+            }else{
+                filter = state.recipes.filter((recipe) => recipe.title)
+            }
+            return {
+                ...state,
+                recipes: filter,
+            }
+        case FILTER_DIETS:
+            const filtDiets = state.recipes.filter(recipe => {
+                return recipe.diets.some(diet => diet === action.payload);
+              });
+            return {
+                ...state,
+                recipes: filtDiets,
             }
         default:
             return {...state}

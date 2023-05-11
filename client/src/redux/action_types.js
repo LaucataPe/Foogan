@@ -1,4 +1,6 @@
 export const GET_RECIPES = 'GET RECIPES'
 export const CREATE_RECIPE = 'CREATE_RECIPE'
-export const FILTER = 'FILTER'
+export const SEARCH_RECIPE = 'SEARCH_RECIPE'
+export const FILTER_ORIGIN = 'FILTER_ORIGIN'
+export const FILTER_DIETS = 'FILTER_DIETS'
 export const ORDER = 'ORDER'

@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {searchRecipe} from '../redux/actions'
 
-export default function SearchBar({ onSearch }) {
-  const [id, setId] = useState('');
+export default function SearchBar() {
+  const [title, setTitle] = useState('');
+  const dispatch = useDispatch()
 
   const handleChange = (event) => {
-    setId(event.target.value);
+    setTitle(event.target.value);
   };
+
+  const handleAdd = (e) =>{
+    e.preventDefault()
+    dispatch(searchRecipe(title))
+  }
   
   return (
     <div>
-      <input type="search" value={id} onChange={handleChange}/>
-      <Link to='/home'><button onClick={() => {
-        onSearch(id) 
-        setId('')
-        }}>Agregar</button></Link>
+      <input type="search" value={title} onChange={handleChange}/>
+      <Link to='/home'><button onClick={(e) => {handleAdd(e)}}>🚽</button></Link>
     </div>
   );
 }

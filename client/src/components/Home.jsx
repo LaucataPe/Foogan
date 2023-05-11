@@ -17,7 +17,7 @@ function Home() {
 
     useEffect(() => {
         setLoading(false)
-        dispatch(getAllRecipes())
+        if(!recipes)dispatch(getAllRecipes())
         setLoading(true)
     }, [])
             

@@ -28,14 +28,14 @@ function CardDetail() {
         <h1>Detail</h1>
         <span>#{recipe.id}</span>
         <h2>{recipe.title}</h2>
-        <p>{recipe.summary}</p>
+        <div dangerouslySetInnerHTML={{ __html: recipe.summary }} />
         <h5>{recipe.healthScore}</h5>
         {Object.keys(recipe).length > 0 ? recipe.diets.map((diet) => (
             <h3>{diet}</h3>
         )):''}
         {Object.keys(recipe).length > 0 ? 
             recipe.steps[0].steps.map((step) => (
-            <h3>{step.number}{step.step}</h3>
+            <p key={step.number}>{step.number}{step.step}</p>
         )):''}
         <img src={recipe.image} alt={recipe.title} />
 

@@ -5,6 +5,7 @@ function Pagination({recipes, loading}) {
     const [currentPage, setCurrentPage] = useState(1)
     const [perPage, setperPage] = useState(9)
 
+    //console.log(recipes);
     const pagesNumber = Math.ceil((recipes.length)/perPage)
    
     const lastPage = currentPage * perPage; 
