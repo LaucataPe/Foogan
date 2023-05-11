@@ -9,7 +9,7 @@ const {createRecipe} = require('../controllers/createRecipe')
 
 router.get('/recipes', getAllRecipes)
 router.get('/recipe/:id', getOneRecipe)
-router.post('/create', createRecipe)
+router.post('/recipes', createRecipe)
 
 
 module.exports = {router}

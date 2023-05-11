@@ -4,9 +4,8 @@ import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function CardDetail() {
-    const { id} = useParams();
+    const { id } = useParams();
     const {search} = useLocation();
-    console.log(search.toString());
     const [recipe, setRecipe] = useState({});
 
     
@@ -14,19 +13,19 @@ function CardDetail() {
     useEffect(() =>{
         const getRecipe = async(id) =>{
             try {
-                const response = await axios(`http://localhost:3001/food/recipe/${id}`);
+                const response = await axios(`http://localhost:3001/food/recipe/${id}${search}`);
                 const data = await response.data;
                 return setRecipe(data);
             } catch (error) {
                 console.log(error)  
+                alert('The recipe does not exists')
             }
         }
         getRecipe(id)
     },[id])
 
+    let stepsNumber = 0;
 
-
-    console.log(recipe);
     return(
         <>
         <h1>Detail</h1>
@@ -34,13 +33,16 @@ function CardDetail() {
         <h2>{recipe.title}</h2>
         <div dangerouslySetInnerHTML={{ __html: recipe.summary }} />
         <h5>{recipe.healthScore}</h5>
-        {Object.keys(recipe).length > 0 ? recipe.diets.map((diet) => (
-            <h3>{diet}</h3>
+        {recipe.diets ? recipe.diets.map((diet) => (
+            <h3 key={diet}>{diet}</h3>
         )):''}
-        {Object.keys(recipe).length > 0 ? 
-            recipe.steps[0].steps.map((step) => (
+        {recipe.steps ? recipe.steps[0].steps.map((step) => (
             <p key={step.number}>{step.number}. {step.step}</p>
         )):''}
+         {recipe.stepsdb ? recipe.stepsdb.map((step) => {
+            stepsNumber++;
+            return <p key={stepsNumber}>{stepsNumber}. {step}</p>
+         }):''} 
         <img src={recipe.image} alt={recipe.title} />
 
         <Link to='/home'><button>Home</button></Link>
