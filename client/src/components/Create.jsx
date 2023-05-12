@@ -11,6 +11,7 @@ function Create() {
         summary: '',
         healthScore: 0,
         image: '',
+        diets: [],
         steps: []
     })
     const [inputValue, setInputValue] = useState('');
@@ -74,6 +75,7 @@ function Create() {
                 summary: '',
                 healthScore: 0,
                 image: '',
+                diets: [],
                 steps: []
             })
         }else{
