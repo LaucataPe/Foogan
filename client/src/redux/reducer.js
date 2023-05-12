@@ -1,8 +1,9 @@
-import {GET_RECIPES, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS} from "./action_types"
+import {GET_RECIPES,GET_DIETS, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS, ORDER} from "./action_types"
 
 const initialState = {
     recipes: [],
-    allRecipes: []
+    allRecipes: [],
+    diets: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -12,6 +13,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: action.payload,
                 allRecipes: action.payload
+            }
+        case GET_DIETS:
+            return {
+                ...state,
+                diets: action.payload,
             }
         case SEARCH_RECIPE:
             return {
@@ -25,7 +31,7 @@ const reducer = (state = initialState, action) => {
             }else if(action.payload === 'api'){
                 filter = state.recipes.filter((recipe) => !recipe.database)
             }else{
-                filter = state.recipes.filter((recipe) => recipe.title)
+                filter = state.allRecipes
             }
             return {
                 ...state,
@@ -39,6 +45,27 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: filtDiets,
             }
+        case ORDER:
+            const recipesCopy = [...state.recipes];
+            let order;
+            if (action.payload[1] === "A") {
+            order = recipesCopy.sort((a, b) => {
+                if (a[action.payload[0]] === b[action.payload[0]]) return 0;
+                if (a[action.payload[0]] < b[action.payload[0]]) return -1;
+                return 1;
+            });
+            }
+            if (action.payload[1] === "D") {
+            order = recipesCopy.sort((a, b) => {
+                if (a[action.payload[0]] === b[action.payload[0]]) return 0;
+                if (a[action.payload[0]] > b[action.payload[0]]) return -1;
+                return 1;
+            });
+            }
+            return {
+            ...state,
+            recipes: order,
+            };
         default:
             return {...state}
     }

@@ -36,7 +36,7 @@ function Pagination({recipes, loading}) {
 
     return(
         <>
-        {find === false ? <h1>Che, no hay recetas así!</h1> : ''}
+        {find === false ? <h1>Recipe Not found</h1> : ''}
         <Card recipes={currentRecipes} loading={loading}/>
         <div className='pagination'>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>First</button>

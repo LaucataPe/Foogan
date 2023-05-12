@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useState, useEffect } from 'react';
+//import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-//import Steps from './Steps';
 import validate from './validation';
 
 
@@ -14,10 +14,27 @@ function Create() {
         diets: [],
         steps: []
     })
-    const [inputValue, setInputValue] = useState('');
     const [errors, setErrors] = useState({})
+    const [step, setStep] = useState('');
+    const [diets, setDiets] = useState([]);
+
     const navigate = useNavigate();
 
+
+    useEffect(() => {
+        const dbDiets = async () =>{
+            try {
+                let response = await axios(`http://localhost:3001/food/diets/db`);
+                let data = response.data;
+                setDiets(data)
+            } catch (error) {
+              console.log(error);  
+            }
+        }
+        dbDiets()
+    }, []);
+
+    console.log(diets);
     const handleInputs = (event) =>{
         setInput({...input, 
             [event.target.name]: event.target.value})
@@ -28,7 +45,7 @@ function Create() {
         }))
     }
     const handleDiet = (event) => {
-        const value = event.target.value;
+        const value = Number(event.target.value);
         const isChecked = event.target.checked;   
         let updatedDiets;
       
@@ -41,14 +58,14 @@ function Create() {
     }
 
     const handleSteps = (event) => {
-        setInputValue(event.target.value);
+        setStep(event.target.value);
       };
 
     const handleAdd = (event) => {
         event.preventDefault()
-        if (inputValue.trim()) {
-            setInput({...input, steps: [...input.steps, inputValue]})
-            setInputValue('');
+        if (step.trim()) {
+            setInput({...input, steps: [...input.steps, step]})
+            setStep('');
         }
         setErrors(validate({
             ...input,
@@ -106,36 +123,18 @@ function Create() {
 
             {/* Diets */}
             <label>Select Diets</label><br />
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="gluten free" />
-            <img src="#" alt="Gluten Free"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="ketogenic"/>
-            <img src="#" alt="Ketogenic"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="vegetarian"/>
-            <img src="#" alt="Vegetarian"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="lacto-vegetarian"/>
-            <img src="#" alt="Lacto-Vegetarian"/>
-            </label>
-            <label>
-            <input onChange={handleDiet} type="checkbox" name="diets" value="pescetarian"/>
-            <img src="#" alt="Pescetarian"/>
-            </label>
-            <label>
-            <input onClick={handleDiet} type="checkbox" name="diets" value="vegan"/>
-            <img src="#" alt="Vegan"/>
-            </label>
+            {diets.length > 0 && diets.map(diet => (
+                <label>
+                <input id={diet.id} onChange={handleDiet} type="checkbox" value={diet.id}/>
+                <img src="#" alt={diet.name}/>
+                </label>
+            ))}
             {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
 
             {/* Steps */}
             <div>
             <h1>Steps</h1>
-                <input type="text" value={inputValue} onChange={handleSteps} placeholder='Here goes the steps...'/>
+                <input type="text" value={step} onChange={handleSteps} placeholder='Here goes the steps...'/>
                 <button onClick={handleAdd}>Add</button>
                 {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : <p>lOL</p> }
             <ol>

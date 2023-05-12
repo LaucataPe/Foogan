@@ -1,8 +1,9 @@
 /* Funcionamiento */ 
 import './App.css';
-//import {useState, useEffect} from 'react';
-//import axios from 'axios';
+import {useEffect} from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { getAllDiets } from "./redux/actions";
+import { useDispatch } from 'react-redux'
 
 /* Vistas*/
 import Landing from './components/Landing'
@@ -14,6 +15,11 @@ import Nav from './components/NavBar';
 
 function App() {
    const {pathname} = useLocation();
+   const dispatch = useDispatch()
+
+   useEffect(() => {
+      dispatch(getAllDiets());
+   }, []);
    return (
       <>
       {pathname !== '/' && <Nav/>} 
