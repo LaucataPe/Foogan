@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import axios from 'axios'
-import { getAllRecipes } from "../redux/actions";
+import { getAllRecipes } from "../../redux/actions";
 import { useDispatch } from 'react-redux'
 
 function Card({recipes}) {

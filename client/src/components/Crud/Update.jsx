@@ -2,26 +2,24 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 //import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
-import validate from './validation';
-
+import {validateUpdate} from './validation';
 
 function Create() {
     const [input, setInput] = useState({
         title: '',
         summary: '',
         healthScore: '',
-        diets: [],
-        stepsdb: [],
         image: '',
     })
     const [errors, setErrors] = useState({})
-    const [diets, setDiets] = useState([]);
+    //const [diets, setDiets] = useState([]); 
+    //const [editedSteps, setEditedSteps] = useState({});
 
     const navigate = useNavigate();
     const {id} = useParams()
 
     useEffect(() => {
-        const dbDiets = async () =>{
+        /*const dbDiets = async () =>{
             try {
                 let diets = await axios(`http://localhost:3001/food/diets/db`);
                 let data = diets.data;
@@ -29,7 +27,7 @@ function Create() {
             } catch (error) {
                 setErrors({...errors, diets: error.message})
             }
-        }
+        }*/
         const getRecipe = async () =>{
             try {
                 let response = await axios(`http://localhost:3001/food/recipe/${id}?database=true`);
@@ -39,21 +37,20 @@ function Create() {
               console.log(error);  
             }
         }
-        dbDiets()
+        //dbDiets()
         getRecipe()
     }, []);
 
-    console.log(input);
     const handleInputs = (event) =>{
         setInput({...input, 
             [event.target.name]: event.target.value})
         
-        /*setErrors(validate({
+        setErrors(validateUpdate({
             ...input,
             [event.target.name]: event.target.value,
-        }))*/
+        }))
     }
-    const handleDiet = (event) => {
+    /*const handleDiet = (event) => {
         const value = Number(event.target.value);
         const isChecked = event.target.checked;   
         let updatedDiets;
@@ -65,19 +62,25 @@ function Create() {
         }
         setInput({ ...input, diets: updatedDiets });
 
-        /*setErrors(validate({
+        setErrors(validate({
             ...input,
             diets: updatedDiets,
-        }))*/ 
-    }
+        })) 
+    }*/
 
-    /*const handleSteps = (event) => {
-        setInput({ ...input, stepsdb: event.target.value });
+    /*const handleStepChange = (event, stepIndex) => {
+        const { value } = event.target;
+        setEditedSteps((prevState) => ({
+          ...prevState,
+          [stepIndex]: value,
+        }));
       };*/
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-    
+        //const compiledSteps = Object.values(editedSteps);
+        //setInput({ ...input, stepsdb: compiledSteps });
+
         if (Object.keys(errors).length === 0) {
             try {
                 let response = await axios.put(`http://localhost:3001/food/update/${id}`, input);
@@ -94,8 +97,6 @@ function Create() {
                 summary: '',
                 healthScore: 0,
                 image: '',
-                diets: [],
-                stepsdb: []
             })
         }else{
             return alert('The are errors!')
@@ -125,8 +126,8 @@ function Create() {
             {errors.image !== '' ? <p><strong>{errors.image}</strong></p> : <p></p> }
 
 
-            {/* Diets */}
-            <label>Select Diets</label><br />
+            
+            {/* <label>Select Diets</label><br />
             {diets && diets.map((diet) => {
                 if(input.diets.includes(diet.name)){
                     return(
@@ -146,11 +147,15 @@ function Create() {
             })}
             {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
 
-            {/* Steps */}
+            
             <label>Edit Steps</label><br />
             {input.stepsdb && input.stepsdb.map((step, index) => (
-                <input key={index} id={step} value={step} />
-            ))}
+                <input
+                key={index}
+                value={editedSteps[index] || step}
+                onChange={(event) => handleStepChange(event, index)}
+              />
+            ))} */}
             {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : <p></p> }
             {Object.keys(errors).length > 0 ? <button disabled={true}>Update</button> : <button type='submit'>Update</button>}
 

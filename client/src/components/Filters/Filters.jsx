@@ -1,7 +1,7 @@
 import { useState} from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from "./SearchBar";
-import { filterOrigin, filterDiets, orderBy, resetFilters } from "../redux/actions";
+import { filterOrigin, filterDiets, orderBy, resetFilters } from "../../redux/actions";
 
 function Filters() {
     const [filters, setFilters] = useState({

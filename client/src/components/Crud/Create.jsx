@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import validate from './validation';
+import {validate} from './validation';
 import { useDispatch} from 'react-redux'
 
-import { getAllRecipes } from "../redux/actions";
+import { getAllRecipes } from "../../redux/actions";
 
 function Create() {
     const [input, setInput] = useState({

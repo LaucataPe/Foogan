@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllRecipes } from "../redux/actions";
+import { getAllRecipes } from "../../redux/actions";
 //import { useLocation } from 'react-router-dom';
 
 /*Vistas*/
 import Pagination from './Pagination'
-import Filters from './Filters'
+import Filters from '../Filters/Filters'
 
 function Home() {
     const [loading, setLoading] = useState(false)

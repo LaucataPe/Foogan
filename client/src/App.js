@@ -6,12 +6,12 @@ import { getAllDiets } from "./redux/actions";
 import { useDispatch, useSelector } from 'react-redux'
 
 /* Vistas*/
-import Landing from './components/Landing'
-import Home from './components/Home';
-import Create from './components/Create';
-import Update from './components/Update';
-import CardDetail from './components/CardDetail';
-import Nav from './components/NavBar';
+import Landing from './components/Landing/Landing'
+import Home from './components/Home/Home';
+import Create from './components/Crud/Create';
+import Update from './components/Crud/Update';
+import CardDetail from './components/Detail/CardDetail';
+import Nav from './components/NavBar/NavBar';
 
 
 function App() {

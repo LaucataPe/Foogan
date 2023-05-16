@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {searchRecipe} from '../redux/actions'
+import {searchRecipe} from '../../redux/actions'
 
 export default function SearchBar() {
   const [title, setTitle] = useState('');

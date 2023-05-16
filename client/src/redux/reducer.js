@@ -13,7 +13,8 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
-                allRecipes: action.payload
+                allRecipes: action.payload,
+                filteredRecipes: []
             }
         case GET_DIETS:
             return {
