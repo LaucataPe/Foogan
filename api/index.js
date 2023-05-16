@@ -29,7 +29,7 @@
 const server = require('./src/app')
 const {conn} = require('./src/db')
 
-conn.sync({force: false}).then(() =>{
+conn.sync({force: true}).then(() =>{
     console.log('Database connected, master');
     server.listen(3001, () =>{
         console.log('Server on port: 3001');

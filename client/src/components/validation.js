@@ -12,7 +12,7 @@ const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
     if (!urlRegex.test(inputs.image)) errors.image = "Ingresa una url válida"
 
-    //if (inputs.diets.length < 1) errors.diets = "Select almost one diet!" 
+    if (inputs.diets.length < 1) errors.diets = "Select almost one diet!" 
 
     if (inputs.steps.length === 0) errors.steps = "Include almost one step!" 
 

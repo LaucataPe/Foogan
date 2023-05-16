@@ -1,7 +1,6 @@
 const { Recipe, Diet } = require('../db')
 
 const createRecipe = async (req, res) =>{
-    console.log(req.body);
     try {
         const { title, image, summary, healthScore, steps, diets } = req.body
         console.log(req.body);

@@ -1,16 +1,22 @@
 //import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from "./SearchBar";
-import { filterOrigin, filterDiets, orderBy } from "../redux/actions";
+import { filterOrigin, filterDiets, orderBy, resetFilters } from "../redux/actions";
 
 function Filters() {
     const [filters, setFilters] = useState({
-        orderBy: '',
+        orderBy: 'title',
         way: '',
     })
     const dispatch = useDispatch()
     const diets = useSelector((state) => state.diets)
+
+    useEffect(() => {
+        return () => {
+          dispatch(resetFilters());
+        };
+      }, [dispatch]);
 
     const handleDiet = (event) =>{
         dispatch(filterDiets(event.target.value))

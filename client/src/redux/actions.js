@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_RECIPES, FILTER_ORIGIN, FILTER_DIETS, ORDER, SEARCH_RECIPE, GET_DIETS} from "./action_types";
+import {GET_RECIPES, FILTER_ORIGIN, FILTER_DIETS, ORDER, SEARCH_RECIPE, GET_DIETS, RESET} from "./action_types";
 const endpoint = 'http://localhost:3001/food';
 
 export const getAllRecipes = () => {
@@ -50,7 +50,7 @@ export const orderBy = (orderBy, way) =>{
   return { type: ORDER, payload: [orderBy, way]}
 }
 
-export const resetCards =() =>{
-  return { type: "RESET"}
+export const resetFilters =() =>{
+  return { type: RESET}
 }
  

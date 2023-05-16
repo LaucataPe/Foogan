@@ -55,6 +55,11 @@ function Create() {
           updatedDiets = input.diets.filter((diet) => diet !== value);
         }
         setInput({ ...input, diets: updatedDiets });
+
+        setErrors(validate({
+            ...input,
+            diets: updatedDiets,
+        })) 
     }
 
     const handleSteps = (event) => {
@@ -136,7 +141,7 @@ function Create() {
             <h1>Steps</h1>
                 <input type="text" value={step} onChange={handleSteps} placeholder='Here goes the steps...'/>
                 <button onClick={handleAdd}>Add</button>
-                {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : <p>lOL</p> }
+                {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : '' }
             <ol>
                 {input.steps.map((item, index) => (
                 <li key={index}>{item}</li>

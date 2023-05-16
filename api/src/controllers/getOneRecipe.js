@@ -14,7 +14,7 @@ const getOneRecipe = async (req, res) =>{
             const dietas = recipe.Diets.map(diet => diet.name); // Obtener solo los nombres de las dietas
             data = { ...recipe.toJSON(), diets: dietas }; // Incluir los nombres de las dietas en la respuesta
           } else {
-            const response = await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
+            const response = await axios(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY_2}`);
             data = response.data;
           }
         
