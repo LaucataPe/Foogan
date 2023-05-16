@@ -8,7 +8,6 @@ import { getAllRecipes } from "../redux/actions";
 import Pagination from './Pagination'
 import Filters from './Filters'
 
-
 function Home() {
     const [loading, setLoading] = useState(false)
     const recipes = useSelector((state) => state.recipes)
@@ -19,9 +18,9 @@ function Home() {
         setLoading(false)
         if(allRecipes.length === 0)dispatch(getAllRecipes())
         setLoading(true)
-    }, [allRecipes])
-            
-    
+    }, [])
+
+       
     return(
         <>
         <h1>This is the home </h1>

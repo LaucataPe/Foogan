@@ -15,6 +15,7 @@ const getAllRecipes = async (req, res) =>{
             console.log(filter);
             return res.status(200).json(filter)
         }else{*/
+        console.log(getRecipes);
             return res.status(200).json(getRecipes)
         /*}*/
     } catch (error) {
