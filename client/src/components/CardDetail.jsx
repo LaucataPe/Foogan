@@ -8,8 +8,6 @@ function CardDetail() {
     const {search} = useLocation();
     const [recipe, setRecipe] = useState({});
 
-    
-
     useEffect(() =>{
         const getRecipe = async(id) =>{
             try {

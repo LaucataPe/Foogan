@@ -13,7 +13,8 @@ function Card({recipes, loding}) {
                 {recipe.database ? <Link to={`/detail/${recipe.id}?database=true`}><button>+</button></Link> : 
                 <Link to={`/detail/${recipe.id}`}><button>+</button></Link>
                 }
-                {recipe.database ? <button>X</button> : null}
+                {recipe.database ? <button>X</button> : ''}
+                {recipe.database ? <Link to={`/update/${recipe.id}`}><button>Edit</button></Link> : ''}
             </div>
         ))}
         </>

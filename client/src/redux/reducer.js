@@ -2,9 +2,10 @@ import {GET_RECIPES,GET_DIETS, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS, ORDER
 
 const initialState = {
     recipes: [],
+    filteredRecipes: [] ,// Nuevo estado para almacenar los resultados filtrados
     allRecipes: [],
     diets: []
-}
+  };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -23,33 +24,48 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: action.payload,
+                filteredRecipes: action.payload
             }
         case FILTER_ORIGIN:
             let filter;
+            let theFilter;
+
+            if(state.filteredRecipes.length === 0) theFilter = state.recipes
+            if(state.filteredRecipes.length > 0) theFilter = state.filteredRecipes
+
             if (action.payload === "db") {
-                filter = state.allRecipes.filter((recipe) => recipe.database);
+                filter = theFilter.filter((recipe) => recipe.database);
             } else if (action.payload === "api") {
-                filter = state.allRecipes.filter((recipe) => !recipe.database);
+                filter = theFilter.filter((recipe) => !recipe.database);
             } else {
-                filter = state.allRecipes;
+                if(state.filteredRecipes.length === 0) filter = state.allRecipes;
+                if(state.filteredRecipes.length > 0) filter = state.filteredRecipes;
             }
             return {
                 ...state,
                 recipes: filter
             };
+
         case FILTER_DIETS:
             let filteredRecipes;
-            if (action.payload === 'all') {
+            if (action.payload === 'all' && state.filteredRecipes.length === 0) {
                 filteredRecipes = state.allRecipes;
-            }else{
-                filteredRecipes = state.allRecipes.filter((recipe) => {
+            }else if(action.payload === 'all' && state.filteredRecipes.length > 0){
+                filteredRecipes = state.filteredRecipes;
+            }         
+            else if(state.filteredRecipes.length > 0){
+                filteredRecipes = state.filteredRecipes.filter((recipe) => {
+                return recipe.diets.some((diet) => diet === action.payload);
+            })}else{
+                console.log(state.recipes);
+                filteredRecipes = state.recipes.filter((recipe) => {
                     return recipe.diets.some((diet) => diet === action.payload);
-                  });
+                })
             }
-              return {
-                ...state,
-                recipes: filteredRecipes
-              };
+                return {
+                  ...state,
+                  recipes: filteredRecipes,
+                };
         case ORDER:
             const recipesCopy = [...state.recipes];
             if (action.payload[1] === "A") {
@@ -75,6 +91,7 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 recipes: state.allRecipes,
+                filteredRecipes: []
             };
         default:
             return state

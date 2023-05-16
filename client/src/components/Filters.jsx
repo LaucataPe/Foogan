@@ -1,5 +1,4 @@
-//import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import SearchBar from "./SearchBar";
 import { filterOrigin, filterDiets, orderBy, resetFilters } from "../redux/actions";
@@ -11,12 +10,6 @@ function Filters() {
     })
     const dispatch = useDispatch()
     const diets = useSelector((state) => state.diets)
-
-    useEffect(() => {
-        return () => {
-          dispatch(resetFilters());
-        };
-      }, [dispatch]);
 
     const handleDiet = (event) =>{
         dispatch(filterDiets(event.target.value))
@@ -55,7 +48,9 @@ function Filters() {
             <option value="healthScore">Health Score</option>
         </select>
         <button value="A" onClick={(e) => handleOrder(e)}>Up</button>
-        <button value="D" onClick={(e) => handleOrder(e)}>Down</button>
+        <button value="D" onClick={(e) => handleOrder(e)}>Down</button><br />
+
+        <button onClick={() => dispatch(resetFilters())}>Reset</button>
         </>
     );
  }

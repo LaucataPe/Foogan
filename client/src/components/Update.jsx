@@ -1,48 +1,57 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom';
 import validate from './validation';
-import { useDispatch} from 'react-redux'
 
-import { getAllRecipes } from "../redux/actions";
 
 function Create() {
     const [input, setInput] = useState({
         title: '',
         summary: '',
-        healthScore: 0,
-        image: '',
+        healthScore: '',
         diets: [],
-        steps: []
+        stepsdb: [],
+        image: '',
     })
-    const [errors, setErrors] = useState({title:''})
-    const [step, setStep] = useState('');
+    const [errors, setErrors] = useState({})
     const [diets, setDiets] = useState([]);
 
-    const dispatch = useDispatch()
     const navigate = useNavigate();
+    const {id} = useParams()
 
     useEffect(() => {
         const dbDiets = async () =>{
             try {
-                let response = await axios(`http://localhost:3001/food/diets/db`);
-                let data = response.data;
+                let diets = await axios(`http://localhost:3001/food/diets/db`);
+                let data = diets.data;
                 setDiets(data)
             } catch (error) {
-              setErrors({...errors, diets: error.message})
+                setErrors({...errors, diets: error.message})
+            }
+        }
+        const getRecipe = async () =>{
+            try {
+                let response = await axios(`http://localhost:3001/food/recipe/${id}?database=true`);
+                let data = response.data;
+                setInput(data)
+            } catch (error) {
+              console.log(error);  
             }
         }
         dbDiets()
+        getRecipe()
     }, []);
 
+    console.log(input);
     const handleInputs = (event) =>{
         setInput({...input, 
             [event.target.name]: event.target.value})
         
-        setErrors(validate({
+        /*setErrors(validate({
             ...input,
             [event.target.name]: event.target.value,
-        }))
+        }))*/
     }
     const handleDiet = (event) => {
         const value = Number(event.target.value);
@@ -56,46 +65,29 @@ function Create() {
         }
         setInput({ ...input, diets: updatedDiets });
 
-        setErrors(validate({
+        /*setErrors(validate({
             ...input,
             diets: updatedDiets,
-        })) 
+        }))*/ 
     }
 
-    const handleSteps = (event) => {
-        setStep(event.target.value);
-      };
-
-    const handleAdd = (event) => {
-        event.preventDefault()
-        if (step.trim()) {
-            setInput({...input, steps: [...input.steps, step]})
-            setStep('');
-        }
-        setErrors(validate({
-            ...input,
-            steps: [step],
-        })) 
-      };
+    /*const handleSteps = (event) => {
+        setInput({ ...input, stepsdb: event.target.value });
+      };*/
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
     
         if (Object.keys(errors).length === 0) {
             try {
-                let response = await axios.post(`http://localhost:3001/food/recipes`, input);
+                let response = await axios.put(`http://localhost:3001/food/update/${id}`, input);
                 let data = response.data;
                 if(data){
                     navigate('/home')
-                    dispatch(getAllRecipes())
-                    return alert('Your recipe was created')
+                    return alert('Your recipe was updated correctly')
                 } 
              } catch (error) {
-              if (error.response.data.includes('unicidad')) {
-                return setErrors({errorEnvio: 'The title of the current recipe alredy exists!'})
-              }else{
-                return alert(error.response.data)
-              }
+              console.log(error);  
              }
             setInput({
                 title: '',
@@ -103,7 +95,7 @@ function Create() {
                 healthScore: 0,
                 image: '',
                 diets: [],
-                steps: []
+                stepsdb: []
             })
         }else{
             return alert('The are errors!')
@@ -112,12 +104,13 @@ function Create() {
     
     return(
         <>
-        <h1>Create your own recipe</h1>
+        <h1>Updating recipe</h1>
+        
         <form onSubmit={handleSubmit}>
             <label>Title</label>
             <input value={input.title} onChange={handleInputs} type="text" name='title' /><br />
             {errors.title !== '' ? <p><strong>{errors.title}</strong></p> : <p></p> }
-            {errors.errorEnvio ? <p><strong>{errors.errorEnvio}</strong></p> : <p></p> }
+
             <label>Summary</label>
             <textarea value={input.summary} onChange={handleInputs} name="summary" placeholder='Add a bit desription of the recipe...'></textarea><br />
             {errors.summary !== '' ? <p><strong>{errors.summary}</strong></p> : <p></p> }
@@ -134,31 +127,36 @@ function Create() {
 
             {/* Diets */}
             <label>Select Diets</label><br />
-            {diets.length > 0 && diets.map(diet => (
-                <label>
-                <input key={diet.id} onChange={handleDiet} type="checkbox" value={diet.id}/>
-                <img src="#" alt={diet.name}/>
-                </label>
-            ))}
+            {diets && diets.map((diet) => {
+                if(input.diets.includes(diet.name)){
+                    return(
+                        <label key={diet.id}>
+                            <input id={diet.id} onChange={handleDiet} type="checkbox" value={diet.id} checked/>
+                            <img src="#" alt={diet.name} />
+                        </label>
+                     )
+                }else{
+                    return (
+                        <label key={diet.id}>
+                            <input id={diet.id} onChange={handleDiet} type="checkbox" value={diet.id} />
+                            <img src="#" alt={diet.name} />
+                        </label>
+                    )
+                }
+            })}
             {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
 
             {/* Steps */}
-            <div>
-            <h1>Steps</h1>
-                <input type="text" value={step} onChange={handleSteps} placeholder='Here goes the steps...'/>
-                <button onClick={handleAdd}>Add</button>
-                {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : '' }
-            <ol>
-                {input.steps.map((item, index) => (
-                <li key={index}>{item}</li>
-                ))}
-            </ol>
-            </div>
-
-            {Object.keys(errors).length > 0 ? <button disabled={true}>Create</button> : <button type='submit'>Create</button>}
+            <label>Edit Steps</label><br />
+            {input.stepsdb && input.stepsdb.map((step, index) => (
+                <input key={index} id={step} value={step} />
+            ))}
+            {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : <p></p> }
+            {Object.keys(errors).length > 0 ? <button disabled={true}>Update</button> : <button type='submit'>Update</button>}
 
             
         </form>
+
         </>
     )
 }
