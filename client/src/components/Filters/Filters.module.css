@@ -1,0 +1,82 @@
+.container{
+    display: flex;
+    align-items: center;
+    margin: 10px 30px;
+    position: relative;
+}
+
+.filters{
+    display: flex;
+    align-items: center;
+}
+
+.orders{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 30%;
+    right: 0;
+}
+
+.container select {
+    height: 50%;
+    border: none;
+    background-color: #e5e5e5;
+    border-radius: 1rem;
+    padding: 10px;
+    margin-right: 10px;
+    margin-left: 5px;
+}
+
+.order, .active{
+    padding: 10px;
+    height: 50%;
+    border: none;
+    width: 15%;
+    border-radius: 1rem;
+}
+
+.active{
+    background-color: #2BA84A;
+    color: #fff;
+}
+
+.reset{
+    cursor: pointer;
+    font-size: 23px;
+    font-weight: bold;
+    background-color: #2D3A3A;
+    color: #fff;
+    border-radius: .3rem;
+}
+
+
+/*SearchBar*/
+
+.search{
+    position: relative;
+    height: 50%;
+    margin-right: 10px;
+}
+
+.bar{
+    border: none;
+    border-radius: 1.5rem;
+    height: 40px;
+    width: 300px;
+    padding: 10px;
+    background-color: #e5e5e5;
+}
+
+.button{
+    position: absolute;
+    right: 5px;
+    top: 4.5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 1rem;
+    padding: 8px 15px;    
+    color: #fff;
+    background-color: #2BA84A;
+    font-weight: bolder;
+}

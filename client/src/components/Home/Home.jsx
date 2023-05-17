@@ -23,7 +23,7 @@ function Home() {
        
     return(
         <>
-        <h1>This is the home </h1>
+        <h1>Look for your favourite recipes!</h1>
         <Filters />
         <Pagination recipes={recipes} loading={loading}/>
         <Link to='/'><button>Back</button></Link>

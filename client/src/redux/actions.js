@@ -9,7 +9,7 @@ export const getAllRecipes = () => {
         const data = response.data;
         return dispatch({type: GET_RECIPES, payload: data});
     } catch (error) {
-        return alert(error.response.data) 
+        console.log(error) 
     }
     };
  };
@@ -21,7 +21,7 @@ export const getAllRecipes = () => {
       const data = response.data;
       return dispatch({type: GET_DIETS, payload: data});
   } catch (error) {
-      return alert(error.response.data) 
+      console.log(error) 
   }
   };
 };
@@ -33,7 +33,7 @@ export const searchRecipe = (query) => {
       const data = response.data;
       return dispatch({type: SEARCH_RECIPE, payload: data});
   } catch (error) {
-      return alert(error.response.data) 
+      console.log(error) 
   }
   };
 };

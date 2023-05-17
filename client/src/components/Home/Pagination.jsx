@@ -39,11 +39,11 @@ function Pagination({recipes, loading}) {
         {find === false ? <h1>Recipe Not found</h1> : ''}
         <Card recipes={currentRecipes} loading={loading}/>
         <div className='pagination'>
-            <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>First</button>
-            <button disabled={currentPage === 1 || currentPage < 1} onClick={onPreviusPage}>Previous</button>
+            <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>{'<<'}</button>
+            <button disabled={currentPage === 1 || currentPage < 1} onClick={onPreviusPage}>{'<'}</button>
             <h1>Page {currentPage} of {pagesNumber}</h1>
-            <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={onNextPage}>Next</button>
-            <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={(event) => onSpecificPage(event)}>Last</button>
+            <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={onNextPage}>{'>'}</button>
+            <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={(event) => onSpecificPage(event)}>{'>>'}</button>
         </div>
         </>
     )

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {searchRecipe} from '../../redux/actions'
+import styles from './Filters.module.css'
 
 export default function SearchBar() {
   const [title, setTitle] = useState('');
@@ -17,9 +18,9 @@ export default function SearchBar() {
   }
   
   return (
-    <div>
-      <input type="search" value={title} onChange={handleChange}/>
-      <Link to='/home'><button onClick={(e) => {handleAdd(e)}}>🚽</button></Link>
+    <div className={styles.search}>
+      <input type="search" value={title} onChange={handleChange} className={styles.bar} placeholder='Write a name...'/>
+      <Link to='/home'><button onClick={(e) => {handleAdd(e)}} className={styles.button}>Search</button></Link>
     </div>
   );
 }

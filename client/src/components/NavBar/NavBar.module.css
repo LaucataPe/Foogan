@@ -1,0 +1,18 @@
+nav{
+    margin: 10px 100px;
+    position: relative;
+}
+
+.create{
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    border: none;
+    border-radius: 1rem;
+    background-color: #2BA84A;
+    color: #fff;
+    box-shadow: 0 0 5px 0 #248232;
+    font-weight: bold;
+    cursor: pointer;
+}
+
