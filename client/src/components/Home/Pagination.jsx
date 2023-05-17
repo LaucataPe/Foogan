@@ -30,7 +30,7 @@ function Pagination({recipes, loading}) {
     }
 
     const onSpecificPage = (event) =>{
-        if(event.target.innerHTML === 'First') return setCurrentPage(1)
+        if(event.target.value === 'First') return setCurrentPage(1)
         return setCurrentPage(pagesNumber)
     }
 
@@ -40,7 +40,7 @@ function Pagination({recipes, loading}) {
         {find === false ? <h2 className={styles.message}>Sorry! The recipe you were looking for does not exist</h2> : ''}
         <Card recipes={currentRecipes} loading={loading}/>
         <div className={styles.pagination}>
-            <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>{'<<'}</button>
+            <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)} value='First'>{'<<'}</button>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={onPreviusPage}>{'<'}</button>
             <h3>Page {currentPage} of {pagesNumber}</h3>
             <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={onNextPage}>{'>'}</button>

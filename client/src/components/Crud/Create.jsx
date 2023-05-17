@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {validate} from './validation';
 import { useDispatch} from 'react-redux'
+import Images from '../../img/index'
 
 import { getAllRecipes } from "../../redux/actions";
 
@@ -137,7 +138,7 @@ function Create() {
             {diets.length > 0 && diets.map(diet => (
                 <label>
                 <input key={diet.id} onChange={handleDiet} type="checkbox" value={diet.id}/>
-                <img src="#" alt={diet.name}/>
+                <img src={Images[diet.name]} alt={diet.name}/>
                 </label>
             ))}
             {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }

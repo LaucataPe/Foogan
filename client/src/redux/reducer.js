@@ -30,8 +30,9 @@ const reducer = (state = initialState, action) => {
         case FILTER_ORIGIN:
             let filter;
             let theFilter;
+            const allRecipesCopy = [...state.allRecipes];
 
-            if(state.filteredRecipes.length === 0) theFilter = state.recipes
+            if(state.filteredRecipes.length === 0) theFilter = allRecipesCopy
             if(state.filteredRecipes.length > 0) theFilter = state.filteredRecipes
 
             if (action.payload === "db") {
