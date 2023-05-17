@@ -3,7 +3,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {validate} from './validation';
 import { useDispatch} from 'react-redux'
-import Images from '../../img/index'
+
+/*Styles*/
+import images from '../../img/index'
+import styles from './Create.module.css'
 
 import { getAllRecipes } from "../../redux/actions";
 
@@ -78,7 +81,7 @@ function Create() {
             steps: [step],
         })) 
       };
-
+    
     const handleSubmit = async (e) =>{
         e.preventDefault();
     
@@ -113,53 +116,64 @@ function Create() {
     
     return(
         <>
-        <h1>Create your own recipe</h1>
-        <form onSubmit={handleSubmit}>
-            <label>Title</label>
-            <input value={input.title} onChange={handleInputs} type="text" name='title' /><br />
-            {errors.title !== '' ? <p><strong>{errors.title}</strong></p> : <p></p> }
-            {errors.errorEnvio ? <p><strong>{errors.errorEnvio}</strong></p> : <p></p> }
-            <label>Summary</label>
-            <textarea value={input.summary} onChange={handleInputs} name="summary" placeholder='Add a bit desription of the recipe...'></textarea><br />
-            {errors.summary !== '' ? <p><strong>{errors.summary}</strong></p> : <p></p> }
+        <div className={styles.container}>
+            <img src={images.create} alt='Vegan food' />
+            <form onSubmit={handleSubmit}>
+            <h1 className={styles.title}>Create your own recipe</h1>
+                <label>Title</label><br/>
+                <input value={input.title} onChange={handleInputs} type="text" name='title' placeholder='Write a title...' /><br />
+                {errors.title !== '' ? <p className={styles.errors}><strong>{errors.title}</strong></p> : <p></p> }
+                {errors.errorEnvio ? <p className={styles.errors}><strong>{errors.errorEnvio}</strong></p> : <p></p> }
+                
+                <label>Summary</label><br/>
+                <textarea value={input.summary} onChange={handleInputs} name="summary" placeholder='Add a bit desription of the recipe...'
+                rows="5" cols="33"></textarea><br />
+                {errors.summary !== '' ? <p className={styles.errors}><strong>{errors.summary}</strong></p> : <p></p> }
 
-            <label>Health Score: </label>
-            <input onChange={handleInputs} value={input.healthScore} type="range" name="healthScore" min="10" max="100"/>
-            <h5>{input.healthScore}</h5><br />
-            {errors.healthScore !== '' ? <p><strong>{errors.healthScore}</strong></p> : <p></p> }
+                <label>Health Score -</label><span> {input.healthScore}</span><br/>
+                <input onChange={handleInputs} value={input.healthScore} type="range" name="healthScore" min="10" max="100" className={styles.range}/>
+                {errors.healthScore !== '' ? <p className={styles.errors}><strong>{errors.healthScore}</strong></p> : <p></p> }
 
-            <label>Image</label>
-            <input value={input.image} onChange={handleInputs} type="text" name='image' placeholder='Image Url...'/><br />
-            {errors.image !== '' ? <p><strong>{errors.image}</strong></p> : <p></p> }
+                <label>Image</label><br/>
+                <input value={input.image} onChange={handleInputs} type="text" name='image' placeholder='Image Url...'/><br />
+                {errors.image !== '' ? <p className={styles.errors}><strong>{errors.image}</strong></p> : <p></p> }
 
-
-            {/* Diets */}
-            <label>Select Diets</label><br />
-            {diets.length > 0 && diets.map(diet => (
-                <label>
-                <input key={diet.id} onChange={handleDiet} type="checkbox" value={diet.id}/>
-                <img src={Images[diet.name]} alt={diet.name}/>
-                </label>
-            ))}
-            {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
-
-            {/* Steps */}
-            <div>
-            <h1>Steps</h1>
-                <input type="text" value={step} onChange={handleSteps} placeholder='Here goes the steps...'/>
-                <button onClick={handleAdd}>Add</button>
-                {errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : '' }
-            <ol>
-                {input.steps.map((item, index) => (
-                <li key={index}>{item}</li>
+                
+                <label>Select Diets</label><br />
+                <div className={styles.diets}>
+                {/* Diets */}
+                {diets.length > 0 && diets.map(diet => (
+                    <label className={styles.labelDiets}>
+                    <input key={diet.id} onChange={handleDiet} type="checkbox" value={diet.id} />
+                    <span>{diet.name}</span>
+                    </label>
                 ))}
-            </ol>
-            </div>
+                </div>
 
-            {Object.keys(errors).length > 0 ? <button disabled={true}>Create</button> : <button type='submit'>Create</button>}
+                {errors.diets !== '' ? <p className={styles.errors}><strong>{errors.diets}</strong></p> : <p></p> }
 
-            
-        </form>
+
+                {/* Steps */}
+                <div>
+                <label>Steps</label><br />
+                    <div className={styles.steps}>
+                        <input type="text" value={step} onChange={handleSteps} placeholder='Here goes the steps...'/>
+                        <button onClick={handleAdd} className={styles.add}>Add</button>
+                    </div>
+                    {errors.steps !== '' ? <p className={styles.errors}><strong>{errors.steps}</strong></p> : '' }
+                <ol>
+                    {input.steps.map((item, index) => (
+                    <li key={index}>{item}</li>
+                    ))}
+                </ol>
+                </div>
+
+                {Object.keys(errors).length > 0 ? <button disabled={true} className={styles.create}>Create</button> : 
+                <button type='submit' className={styles.create}>Create</button>}
+
+                
+            </form>
+        </div>
         </>
     )
 }

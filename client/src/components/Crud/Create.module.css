@@ -1,0 +1,141 @@
+.title{
+    text-align: center;
+    color: #2BA84A;
+}
+
+.container{
+    display: flex;
+}
+
+.container img{
+    width: 50%;
+    height: 1000px;
+    object-fit: cover;
+    border-radius: 5rem;
+    padding: 60px 30px;
+}
+
+.container form{
+    width: 50%;
+    padding: 10px 50px;
+    margin: 20px 100px;
+}
+
+.container label{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.container input{
+    width: 95%;
+    border: 1px solid #c0c0c0;
+    background-color: #ffffffbc;
+    border-radius: 1rem;
+    padding: 5px 10px;
+    margin: 5px 0px;
+}
+
+.container textarea{
+    width: 95%;
+    margin: 10px 0px;
+    border: 1px solid #c0c0c0;
+    background-color: #ffffffbc;
+    border-radius: 1rem;
+    padding: 10px;
+}
+
+
+
+.errors{
+    color: rgba(255, 0, 0, 0.775);
+    margin: none;
+}
+
+.diets{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.labelDiets{
+    cursor: pointer;
+    background-color: none;
+    border: 1px solid #2BA84A;
+    border-radius: .5rem;
+    padding: 5px 10px;
+    margin: 10px;
+    width: 80px;
+    text-align: center;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.labelDiets input{
+    display: none;
+}
+
+.labelDiets span{
+    font-size: 15px;
+}
+
+.labelDiets input[type="checkbox"]:checked + span{
+    color: #2BA84A;/* Cambia el color a tu preferencia */
+}
+
+.add{
+    cursor: cell;
+    background-color: #2BA84A;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 1rem;
+    color: #fff;
+    font-weight: 700;
+    height: 30px;
+    margin-left: 10px;
+    width: 100px;
+}
+
+.add:hover{
+    background-color: #2D3A3A;
+    color: #fff;
+}
+
+.steps{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.create{
+    cursor: pointer;
+    background-color: #2BA84A;
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 800;
+    border: none;
+    border-radius: 3rem;
+}
+
+.create:hover{
+    background-color: #fff;
+    color: #2BA84A;
+    border: 2px solid #2BA84A;
+}
+
+.create:disabled{
+    cursor: no-drop;
+    background-color: #2d3a3a4a;
+    padding: 10px;
+    width: 100%;
+}
+
+
+
+
+

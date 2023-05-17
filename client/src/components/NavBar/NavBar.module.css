@@ -1,11 +1,18 @@
 nav{
     margin: 10px 100px;
     position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.logo{
+    width: 15%;
+    height: 15%;
 }
 
 .create{
-    position: absolute;
-    right: 0;
+    width: 200px;
     padding: 10px;
     border: none;
     border-radius: 1rem;
