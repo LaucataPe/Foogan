@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Card from '../Card/Card'
+import styles from './Home.module.css'
 
 function Pagination({recipes, loading}) {
 
@@ -36,12 +37,12 @@ function Pagination({recipes, loading}) {
 
     return(
         <>
-        {find === false ? <h1>Recipe Not found</h1> : ''}
+        {find === false ? <h2 className={styles.message}>Sorry! The recipe you were looking for does not exist</h2> : ''}
         <Card recipes={currentRecipes} loading={loading}/>
-        <div className='pagination'>
+        <div className={styles.pagination}>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)}>{'<<'}</button>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={onPreviusPage}>{'<'}</button>
-            <h1>Page {currentPage} of {pagesNumber}</h1>
+            <h3>Page {currentPage} of {pagesNumber}</h3>
             <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={onNextPage}>{'>'}</button>
             <button disabled={currentPage === pagesNumber || currentPage > pagesNumber} onClick={(event) => onSpecificPage(event)}>{'>>'}</button>
         </div>

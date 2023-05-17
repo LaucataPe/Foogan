@@ -1,0 +1,41 @@
+.title{
+    text-align: center;
+    color: #248232;
+}
+
+.message{
+    text-align: center;
+    color: #040f0f8b;
+    margin: 100px 0px;
+}
+
+.pagination{
+    display: flex;
+    height: 25px; 
+    align-items: center;   
+    justify-content: center;
+}
+
+.pagination h3{
+    margin: 10px 20px;
+    font-weight: 500;
+}
+
+.pagination button{
+    border: none;
+    padding: 10px;
+    margin: 3px;
+    background-color: #2BA84A;
+    color: #FCFFFC;
+    border-radius: .5rem;
+}
+
+.pagination button:disabled{
+    cursor: no-drop;
+    background-color: #818383;
+}
+
+.pagination button:hover{
+    transform: scale(1.2);
+    transition: all 0.5s;
+}

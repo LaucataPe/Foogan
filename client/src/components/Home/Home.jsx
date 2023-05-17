@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRecipes } from "../../redux/actions";
+import styles from './Home.module.css'
 //import { useLocation } from 'react-router-dom';
 
 /*Vistas*/
@@ -23,10 +24,10 @@ function Home() {
        
     return(
         <>
-        <h1>Look for your favourite recipes!</h1>
+        <h1 className={styles.title}>Look for your favourite recipes!</h1>
+        <hr />
         <Filters />
         <Pagination recipes={recipes} loading={loading}/>
-        <Link to='/'><button>Back</button></Link>
         </>
     )
 }

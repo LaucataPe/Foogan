@@ -19,11 +19,11 @@ function App() {
    const dispatch = useDispatch()
    const diets = useSelector((state) => state.diets)
 
-   useEffect(() => {
+   /*useEffect(() => {
       if (diets.length === 0) {
         dispatch(getAllDiets());
       }
-    }, [diets]); 
+    }, [diets]); */
    return (
       <>
       {pathname !== '/' && <Nav />}

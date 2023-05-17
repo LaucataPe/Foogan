@@ -6,7 +6,7 @@ function Nav() {
 
     return (
       <nav>
-            <Link to='/home'><img src='#' alt="Logo Food" className={styles.logo}/></Link>    
+            <Link to='/'><img src='#' alt="Logo Food" className={styles.logo}/></Link>    
             <Link to='/create'><button className={styles.create}>Create Recipe!</button></Link>
       </nav>
     );
