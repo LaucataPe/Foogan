@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {validate} from './validation';
 import { useDispatch} from 'react-redux'
 
@@ -96,7 +96,7 @@ function Create() {
                 } 
              } catch (error) {
               if (error.response.data.includes('unicidad')) {
-                return setErrors({errorEnvio: 'The title of the current recipe alredy exists!'})
+                return setErrors({errorEnvio: 'The title of the current recipe already exists!'})
               }else{
                 return alert(error.response.data)
               }
@@ -117,6 +117,7 @@ function Create() {
     return(
         <>
         <div className={styles.container}>
+            <Link to='/home'><button className={styles.back}>{'<'} Back</button></Link>
             <img src={images.create} alt='Vegan food' />
             <form onSubmit={handleSubmit}>
             <h1 className={styles.title}>Create your own recipe</h1>

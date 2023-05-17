@@ -5,13 +5,26 @@
 
 .container{
     display: flex;
+    position: relative;
+}
+
+.back{
+    position: absolute;
+    font-size: 25px;
+    width: 100px;
+    border-radius: 1rem;
+    border: none;
+    background-color: #ffffff4e;
+    top: 7%;
+    left: 3%;
+    color: #2D3A3A;
 }
 
 .container img{
     width: 50%;
     height: 1000px;
     object-fit: cover;
-    border-radius: 5rem;
+    border-radius: 10%;
     padding: 60px 30px;
 }
 
@@ -22,7 +35,7 @@
 }
 
 .container label{
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 600;
     margin-bottom: 10px;
     margin-top: 5px;
@@ -35,6 +48,7 @@
     border-radius: 1rem;
     padding: 5px 10px;
     margin: 5px 0px;
+    height: 25px;
 }
 
 .container textarea{
@@ -93,7 +107,7 @@
     border-radius: 1rem;
     color: #fff;
     font-weight: 700;
-    height: 30px;
+    height: 35px;
     margin-left: 10px;
     width: 100px;
 }
