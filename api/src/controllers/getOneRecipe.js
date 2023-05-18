@@ -28,6 +28,7 @@ const getOneRecipe = async (req, res) =>{
             steps: data.analyzedInstructions,
             stepsdb: data.steps,
             image: data.image,
+            Diets: data.Diets
         }
         return res.status(200).json(recipe)
     } catch (error) {

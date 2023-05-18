@@ -18,6 +18,7 @@
     top: 7%;
     left: 3%;
     color: #2D3A3A;
+    cursor: pointer;
 }
 
 .container img{
@@ -93,6 +94,7 @@
 
 .labelDiets span{
     font-size: 15px;
+    color: #67676788;
 }
 
 .labelDiets input[type="checkbox"]:checked + span{

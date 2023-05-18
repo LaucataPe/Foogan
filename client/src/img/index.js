@@ -8,6 +8,7 @@ import vegan from './vegan.png'
 import vegetarian from './vegetarian.png'
 import whole30 from './whole30.png'
 import create from './create.jpg'
+import update from './update.jpg'
 
 
 export default {
@@ -20,5 +21,6 @@ export default {
     vegan,
     vegetarian,
     whole30,
-    create
+    create,
+    update
 }

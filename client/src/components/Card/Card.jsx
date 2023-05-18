@@ -23,6 +23,7 @@ function Card({recipes}) {
     return(
         <div className={styles.container}>
         {recipes.map( recipe =>(
+            <>
             <div key={recipe.id} className={styles.card}>
                 <img src={recipe.image} alt={recipe.title}/>
                 {recipe.database ? <Link to={`/detail/${recipe.id}?database=true`}><h3>{recipe.title}</h3></Link> : 
@@ -31,6 +32,8 @@ function Card({recipes}) {
                 {recipe.database ? <button onClick={() => handleConfirm(recipe.id)} className={styles.delete}>X</button> : ''}
                 {recipe.database ? <Link to={`/update/${recipe.id}`}><button className={styles.edit}>🖋</button></Link> : ''}
             </div>
+            
+            </>
         ))}
         </div>
     )

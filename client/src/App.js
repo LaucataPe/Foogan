@@ -23,7 +23,7 @@ function App() {
       if (diets.length === 0) {
         dispatch(getAllDiets());
       }
-    }, [diets]); */
+    }, [diets]);*/
    return (
       <>
       {pathname !== '/' && <Nav />}
