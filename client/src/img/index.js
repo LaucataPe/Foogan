@@ -10,6 +10,7 @@ import whole30 from './whole30.png'
 import create from './create.jpg'
 import update from './update.jpg'
 import landing from './landing.jpg'
+import home from './home.png'
 
 
 export default {
@@ -24,5 +25,6 @@ export default {
     whole30,
     create,
     update,
-    landing
+    landing,
+    home
 }

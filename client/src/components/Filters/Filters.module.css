@@ -10,6 +10,10 @@
     align-items: center;
 }
 
+.filters p, .orders p{
+    color: #000;
+}
+
 .orders{
     display: flex;
     align-items: center;
