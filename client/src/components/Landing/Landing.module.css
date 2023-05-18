@@ -1,0 +1,51 @@
+.back {
+    width: 100%;
+    background-image: url(../../img/landing.jpg);
+    background-size: cover;
+    margin: none;
+    height: 800px;
+    display: flex;
+    align-items: center;
+}
+
+.back h1{
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.text{
+    margin-left: 13%;
+    width: 400px;
+}
+
+.text img{
+    width: 400px;
+}
+
+.text p{
+    font-weight: 200;
+    color: #828282;
+}
+
+.text span{
+    color: #2BA84A;
+}
+
+.button{
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 3rem;
+    border: none;
+    background-color: #248232;
+    color: #fff;
+    font-weight: 600;
+}
+
+.button:hover{
+    background-color: #fff;
+    border: 2px solid #248232;
+    color: #248232;
+}

@@ -9,6 +9,7 @@ import vegetarian from './vegetarian.png'
 import whole30 from './whole30.png'
 import create from './create.jpg'
 import update from './update.jpg'
+import landing from './landing.jpg'
 
 
 export default {
@@ -22,5 +23,6 @@ export default {
     vegetarian,
     whole30,
     create,
-    update
+    update,
+    landing
 }
