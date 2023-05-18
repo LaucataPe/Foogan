@@ -32,6 +32,10 @@
     margin-left: 5px;
 }
 
+.diet{
+    text-transform: capitalize;
+}
+
 .order, .active{
     padding: 10px;
     height: 50%;

@@ -1,30 +1,36 @@
-import paleo from './paleo.png'
+import paleolithic from './paleolithic.png'
 import logo from './logo.png'
-import glutenfree from './glutenfree.png'
+import gluten from './gluten.png'
 import lacto from './lacto.png'
 import pescatarian from './pecetarian.png'
 import primal from './primal.png'
 import vegan from './vegan.png'
-import vegetarian from './vegetarian.png'
+import ketogenic from './ketogenic.png'
+import dairy from './dairy.png'
+import fodmap from './fodmap.png'
 import whole30 from './whole30.png'
 import create from './create.jpg'
 import update from './update.jpg'
 import landing from './landing.jpg'
 import home from './home.png'
+import star from './star.png'
 
 
 export default {
     logo,
-    paleo,
-    glutenfree,
+    paleolithic,
+    gluten,
     lacto,
     pescatarian,
     primal,
     vegan,
-    vegetarian,
+    ketogenic,
+    dairy,
+    fodmap,
     whole30,
     create,
     update,
     landing,
-    home
+    home,
+    star
 }

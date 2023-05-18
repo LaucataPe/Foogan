@@ -31,10 +31,10 @@ function Filters() {
             <div className={styles.filters}>
                 <p>Filter by:</p>
                 <select name="diet" onChange={(e) => handleDiet(e)}>
-                    <option value="all">All</option>
+                    <option value="all" >All</option>
                     {diets.length > 0 && diets.map(diet => {
-                        return <option key={diet} value={diet}>{diet}</option>;
-                    })}
+                        return <option key={diet} value={diet} className={styles.diet}>{diet}</option>;
+                    })} 
                 </select>
                 <select name="origin"  onChange={(e) => handleOrigin(e)}>
                     <option value="All">All recipes</option>

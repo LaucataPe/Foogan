@@ -38,8 +38,9 @@ function Card({recipes}) {
                 </div>
                 <div className={styles.diets}>
                     {recipe.diets.map(diet =>{
+                        const src = Object.keys(images).find((image) => diet.includes(image))
                         return (
-                            <span className={styles.diet}>{diet}</span>
+                            <img src={src ? images[src] : images.primal} alt="" className={styles.imgDiet}/>
                         )
                     })}
                 </div> 

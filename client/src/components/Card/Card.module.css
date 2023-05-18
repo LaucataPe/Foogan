@@ -15,11 +15,17 @@
 }
 
 .card:hover .diets{
+    visibility: visible;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     transition: all 10s;
     justify-content: center;
+}
+
+.imgDiet{
+    width: 40px;
+    height: 40px;
 }
 
 .delete{
@@ -79,7 +85,7 @@
 /*Diets*/
 
 .diets{
-    display: none;
+    visibility: hidden;
 }
 
 .dietImage{
