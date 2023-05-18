@@ -59,8 +59,8 @@ const reducer = (state = initialState, action) => {
                 filteredRecipes = state.filteredRecipes.filter((recipe) => {
                 return recipe.diets.some((diet) => diet === action.payload);
             })}else{
-                console.log(state.recipes);
-                filteredRecipes = state.recipes.filter((recipe) => {
+                const allRecipesDiets = [...state.allRecipes];
+                filteredRecipes = allRecipesDiets.filter((recipe) => {
                     return recipe.diets.some((diet) => diet === action.payload);
                 })
             }

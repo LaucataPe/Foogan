@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getAllRecipes } from "../../redux/actions";
 import { useDispatch } from 'react-redux'
 import styles from './Card.module.css'
+import images from '../../img/index'
 
 function Card({recipes}) {
     const dispatch = useDispatch();
@@ -24,14 +25,26 @@ function Card({recipes}) {
         <div className={styles.container}>
         {recipes.map( recipe =>(
             <>
-            <div key={recipe.id} className={styles.card}>
-                <img src={recipe.image} alt={recipe.title}/>
-                {recipe.database ? <Link to={`/detail/${recipe.id}?database=true`}><h3>{recipe.title}</h3></Link> : 
-                <Link to={`/detail/${recipe.id}`}><h3>{recipe.title}</h3></Link>}
-                <div className={styles.score}>{recipe.healthScore}</div>
-                {recipe.database ? <button onClick={() => handleConfirm(recipe.id)} className={styles.delete}>X</button> : ''}
-                {recipe.database ? <Link to={`/update/${recipe.id}`}><button className={styles.edit}>🖋</button></Link> : ''}
-            </div>
+            
+            <div className={styles.card}>
+                <div key={recipe.id} className={styles.cardText}>
+                <Link to={recipe.database ? `/detail/${recipe.id}?database=true` : `/detail/${recipe.id}`}>
+                    <img src={recipe.image} alt={recipe.title}  className={styles.recipeImage}/>
+                </Link>
+                    <h3>{recipe.title}</h3>
+                    <div className={styles.score}>{recipe.healthScore}</div>
+                    {recipe.database ? <button onClick={() => handleConfirm(recipe.id)} className={styles.delete}>X</button> : ''}
+                    {recipe.database ? <Link to={`/update/${recipe.id}`}><button className={styles.edit}>🖋</button></Link> : ''}
+                </div>
+                <div className={styles.diets}>
+                    {recipe.diets.map(diet =>{
+                        return (
+                            <span className={styles.diet}>{diet}</span>
+                        )
+                    })}
+                </div> 
+            
+            </div> 
             
             </>
         ))}
