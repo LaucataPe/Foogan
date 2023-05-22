@@ -1,9 +1,7 @@
-import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRecipes } from "../../redux/actions";
 import styles from './Home.module.css'
-//import { useLocation } from 'react-router-dom';
 import images from '../../img/index'
 
 /*Vistas*/

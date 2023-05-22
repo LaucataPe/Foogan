@@ -31,11 +31,11 @@ function Card({recipes}) {
                 <Link to={recipe.database ? `/detail/${recipe.id}?database=true` : `/detail/${recipe.id}`}>
                     <img src={recipe.image} alt={recipe.title}  className={styles.recipeImage}/>
                 </Link>
-                    <h3>{recipe.title}</h3>
+                    <h3 className={styles.recipeTitle}>{recipe.title}</h3>
                     <div className={styles.score}>{recipe.healthScore}</div>
                     {recipe.database ? <button onClick={() => handleConfirm(recipe.id)} className={styles.delete}>X</button> : ''}
                     {recipe.database ? <Link to={`/update/${recipe.id}`}><button className={styles.edit}>🖋</button></Link> : ''}
-                </div>
+                </div>   
                 <div className={styles.diets}>
                     {recipe.diets.map(diet =>{
                         const src = Object.keys(images).find((image) => diet.includes(image))
@@ -43,10 +43,10 @@ function Card({recipes}) {
                             <img src={src ? images[src] : images.primal} alt="" className={styles.imgDiet}/>
                         )
                     })}
-                </div> 
-            
+                </div>         
             </div> 
-            
+             
+
             </>
         ))}
         </div>

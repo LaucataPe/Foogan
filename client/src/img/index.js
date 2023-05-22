@@ -14,6 +14,8 @@ import update from './update.jpg'
 import landing from './landing.jpg'
 import home from './home.png'
 import star from './star.png'
+import github from './github.svg'
+import linkedin from './linkedin.svg'
 
 
 export default {
@@ -32,5 +34,7 @@ export default {
     update,
     landing,
     home,
-    star
+    star,
+    github,
+    linkedin
 }

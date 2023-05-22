@@ -24,3 +24,18 @@ nav{
     margin-right: 50px;
 }
 
+/*Footer*/
+ .footer{
+    background-color: #2D3A3A;
+    text-align: center;
+    padding: 5px 0px;
+    margin-top: 20px;
+ }
+ .footer p{
+    color: #fff;
+    margin: 10px;
+ }
+
+ .footer a{
+    color: #fff;
+ }

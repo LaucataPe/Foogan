@@ -12,6 +12,7 @@ import Create from './components/Crud/Create';
 import Update from './components/Crud/Update';
 import CardDetail from './components/Detail/CardDetail';
 import Nav from './components/NavBar/NavBar';
+import Footer from './components/NavBar/Footer';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
          <Route path='/update/:id' element={<Update />}/>
          <Route path='/detail/:id' element={<CardDetail />}/>
       </Routes>
+      {pathname !== '/' && <Footer />}
       </>
       
    );

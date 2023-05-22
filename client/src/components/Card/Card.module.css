@@ -9,23 +9,34 @@
     background-color: #fff;
     width: 15%;
     border-radius: 1.5rem;
-    margin: 50px 30px;
+    margin: 0px 30px 70px 30px;
     height: 100%;
     text-decoration: none;
+    box-shadow: 0px 10px 10px #0000006c;
 }
 
 .card:hover .diets{
-    visibility: visible;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     transition: all 10s;
     justify-content: center;
+    position: absolute;
+    width: 100%;
+}
+
+.cardText{
+    height: 250px;
+    text-align: center;
 }
 
 .imgDiet{
     width: 40px;
     height: 40px;
+}
+
+.recipeTitle{
+    margin-top: 10px;
 }
 
 .delete{
@@ -85,7 +96,7 @@
 /*Diets*/
 
 .diets{
-    visibility: hidden;
+    display: none;
 }
 
 .dietImage{
