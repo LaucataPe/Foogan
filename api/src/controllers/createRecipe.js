@@ -7,12 +7,11 @@ const createRecipe = async (req, res) =>{
         const urlImage = await cloudinary.uploader.upload(image, {
             folder: "Recipes"
         })
+        const url = urlImage.secure_url
 
         const newRecipe = await Recipe.create({
-            title,summary, healthScore, steps, image:{
-                public_id: urlImage.public_id,
-                url: urlImage.secure_url,
-            }
+            title,summary, healthScore, steps, 
+            image: url
         })
         
         await newRecipe.addDiet(diets);

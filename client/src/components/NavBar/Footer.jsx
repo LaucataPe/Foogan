@@ -1,14 +1,13 @@
 import styles from './NavBar.module.css'
-import images from '../../img/index'
 
 function Footer() {
     return(
         <>
         <div className={styles.footer}>         
-            <p>&copy; Foogan - Made by: <a href="">Laura Pérez</a></p>
+            <p>&copy; Foogan - Made by: <a href="https://www.linkedin.com/in/laura-p%C3%A9rez-49056b248">Laura Pérez</a></p>
         </div>
         </>
     )
 }
 
-export default Footer
+export default Footer   

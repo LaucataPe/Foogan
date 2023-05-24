@@ -28,7 +28,7 @@ function Card({recipes}) {
             
             <div className={styles.card}>
                 <Link to={recipe.database ? `/detail/${recipe.id}?database=true` : `/detail/${recipe.id}`}>
-                    <img src={recipe.image.url} alt={recipe.title}  className={styles.recipeImage}/>
+                    <img src={recipe.image} alt={recipe.title}  className={styles.recipeImage}/>
                 </Link>
                 <div key={recipe.id} className={styles.cardText}>
                 

@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       unique: true
     },
     image: {
-      type: DataTypes.JSON,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     summary:{
@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     steps:{
-      type: DataTypes.ARRAY(DataTypes.STRING),
+      type: DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false
     },
     database: {

@@ -28,14 +28,15 @@ function CardDetail() {
 
     return(
         <>
+        <Link to='/home'><button className={styles.back}>{'<'} Back</button></Link>
         <h2 className={styles.title}>{recipe.title}</h2>
         <h5 className={styles.healthScore}> <img src={images.star} alt="Star"/> {recipe.healthScore}</h5>
         <div className={styles.container}>
             <div className={styles.text}>
                 <h3>Recipe Summary:</h3>
                 <div dangerouslySetInnerHTML={{ __html: recipe.summary }} className={styles.summary}/>
-                <h3>Steps:</h3>
                 <div className={styles.steps}>
+                <h3>Steps:</h3>
                     {recipe.steps ? recipe.steps[0].steps.map((step) => (
                         <p key={step.number}> <span className={styles.number}>{step.number}</span> {step.step}</p>
                         )):''}
@@ -59,7 +60,7 @@ function CardDetail() {
             </div>  
             
         </div>
-        <Link to='/home'><button className={styles.back}>{'<'} Back</button></Link>
+        
         </>
     )
 }

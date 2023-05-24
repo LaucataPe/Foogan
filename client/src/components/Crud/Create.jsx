@@ -53,6 +53,11 @@ function Create() {
         const file = e.target.files[0];
         setFileToBase(file);
         console.log(file);
+
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.files[0],
+        }))
     }
 
     const setFileToBase = (file) =>{
@@ -62,8 +67,8 @@ function Create() {
             setInput({...input, 
                 image: reader.result});
         }
-
     }
+    
     const handleDiet = (event) => {
         const value = Number(event.target.value);
         const isChecked = event.target.checked;   
@@ -152,7 +157,7 @@ function Create() {
                 {errors.healthScore !== '' ? <p className={styles.errors}><strong>{errors.healthScore}</strong></p> : <p></p> }
 
                 <label>Image</label><br/>
-                <input onChange={handleImage} type="file" name='image' placeholder='Image Url...'/><br />
+                <input onChange={handleImage} type="file" name='image' accept=".png, .jpg, .jpeg"/><br />
                 {errors.image !== '' ? <p className={styles.errors}><strong>{errors.image}</strong></p> : <p></p> }
 
                 

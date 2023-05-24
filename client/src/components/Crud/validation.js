@@ -1,4 +1,4 @@
-const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+//const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
   export function validate(inputs){
     let errors = {}
@@ -10,7 +10,7 @@ const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
     if (inputs.healthScore < 10) errors.healthScore = "Health Score can not be 0" 
 
-    //if (!urlRegex.test(inputs.image)) errors.image = "Ingresa una url válida"
+    if (!inputs.image) errors.image = "Select an image!"
 
     if (inputs.diets.length < 1) errors.diets = "Select almost one diet!" 
 
