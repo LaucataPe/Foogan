@@ -48,6 +48,22 @@ function Create() {
             [event.target.name]: event.target.value,
         }))
     }
+
+    const handleImage = (e) =>{
+        const file = e.target.files[0];
+        setFileToBase(file);
+        console.log(file);
+    }
+
+    const setFileToBase = (file) =>{
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onloadend = () =>{
+            setInput({...input, 
+                image: reader.result});
+        }
+
+    }
     const handleDiet = (event) => {
         const value = Number(event.target.value);
         const isChecked = event.target.checked;   
@@ -136,7 +152,7 @@ function Create() {
                 {errors.healthScore !== '' ? <p className={styles.errors}><strong>{errors.healthScore}</strong></p> : <p></p> }
 
                 <label>Image</label><br/>
-                <input value={input.image} onChange={handleInputs} type="text" name='image' placeholder='Image Url...'/><br />
+                <input onChange={handleImage} type="file" name='image' placeholder='Image Url...'/><br />
                 {errors.image !== '' ? <p className={styles.errors}><strong>{errors.image}</strong></p> : <p></p> }
 
                 

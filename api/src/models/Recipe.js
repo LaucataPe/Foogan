@@ -15,8 +15,8 @@ module.exports = (sequelize) => {
       unique: true
     },
     image: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.JSON,
+      allowNull: false
     },
     summary:{
       type: DataTypes.TEXT,

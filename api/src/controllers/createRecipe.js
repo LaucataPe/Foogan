@@ -1,13 +1,20 @@
 const { Recipe, Diet } = require('../db')
+const cloudinary =  require('../utils/cloudinary')
 
 const createRecipe = async (req, res) =>{
+    const { title, image, summary, healthScore, steps, diets } = req.body
     try {
-        const { title, image, summary, healthScore, steps, diets } = req.body
-        console.log(req.body);
-        const newRecipe = await Recipe.create({
-            title, image, summary, healthScore, steps
+        const urlImage = await cloudinary.uploader.upload(image, {
+            folder: "Recipes"
         })
-        console.log(newRecipe);
+
+        const newRecipe = await Recipe.create({
+            title,summary, healthScore, steps, image:{
+                public_id: urlImage.public_id,
+                url: urlImage.secure_url,
+            }
+        })
+        
         await newRecipe.addDiet(diets);
         res.status(200).json(newRecipe)
     } catch (error) {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {validateUpdate} from './validation';
+import {validate} from './validation';
 
 /*Styles*/
 import styles from './Create.module.css'
@@ -11,7 +11,6 @@ function Create() {
     const [input, setInput] = useState({});
     const [errors, setErrors] = useState({})
     const [diets, setDiets] = useState([]); 
-    //const [editedSteps, setEditedSteps] = useState({});
 
     const navigate = useNavigate();
     const {id} = useParams()
@@ -47,15 +46,11 @@ function Create() {
         getRecipe()
     }, []);
 
-    
-
-
-
     const handleInputs = (event) =>{
         setInput({...input, 
             [event.target.name]: event.target.value})
         
-        setErrors(validateUpdate({
+        setErrors(validate({
             ...input,
             [event.target.name]: event.target.value,
         }))
@@ -72,24 +67,14 @@ function Create() {
         }
         setInput({ ...input, diets: updatedDiets });
 
-        /*setErrors(vali({
+        setErrors(validate({
             ...input,
             diets: updatedDiets,
-        }))*/ 
+        })) 
     }
-
-    /*const handleStepChange = (event, stepIndex) => {
-        const { value } = event.target;
-        setEditedSteps((prevState) => ({
-          ...prevState,
-          [stepIndex]: value,
-        }));
-      };*/
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
-        //const compiledSteps = Object.values(editedSteps);
-        //setInput({ ...input, stepsdb: compiledSteps });
 
         if (Object.keys(errors).length === 0) {
             try {
@@ -155,18 +140,8 @@ function Create() {
                     })}
                 </div>
                 
-                {errors.diets !== '' ? <p><strong>{errors.diets}</strong></p> : <p></p> }
+                {errors.diets !== '' ? <p className={styles.errors}><strong>{errors.diets}</strong></p> : <p></p> }
 
-                
-                {/* <label>Edit Steps</label><br />
-                {input.stepsdb && input.stepsdb.map((step, index) => (
-                    <input
-                    key={index}
-                    value={editedSteps[index] || step}
-                    onChange={(event) => handleStepChange(event, index)}
-                />
-                ))} */}
-                {/*errors.steps !== '' ? <p><strong>{errors.steps}</strong></p> : <p></p> */}
                 {Object.keys(errors).length > 0 ? <button disabled={true} className={styles.create}>Update</button> : 
                 <button type='submit' className={styles.create}>Update</button>}
             </form>

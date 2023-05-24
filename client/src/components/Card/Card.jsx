@@ -20,29 +20,25 @@ function Card({recipes}) {
             }
         } 
     }
-
+    console.log(recipes);
     return(
         <div className={styles.container}>
         {recipes.map( recipe =>(
             <>
             
             <div className={styles.card}>
-                <div key={recipe.id} className={styles.cardText}>
                 <Link to={recipe.database ? `/detail/${recipe.id}?database=true` : `/detail/${recipe.id}`}>
-                    <img src={recipe.image} alt={recipe.title}  className={styles.recipeImage}/>
+                    <img src={recipe.image.url} alt={recipe.title}  className={styles.recipeImage}/>
                 </Link>
+                <div key={recipe.id} className={styles.cardText}>
+                
                     <h3 className={styles.recipeTitle}>{recipe.title}</h3>
                     <div className={styles.score}>{recipe.healthScore}</div>
                     {recipe.database ? <button onClick={() => handleConfirm(recipe.id)} className={styles.delete}>X</button> : ''}
-                    {recipe.database ? <Link to={`/update/${recipe.id}`}><button className={styles.edit}>🖋</button></Link> : ''}
+                    {recipe.database ? <Link to={`/update/${recipe.id}`}><img src={images.edit} alt="Edit" className={styles.edit}/></Link> : ''}
                 </div>   
                 <div className={styles.diets}>
-                    {recipe.diets.map(diet =>{
-                        const src = Object.keys(images).find((image) => diet.includes(image))
-                        return (
-                            <img src={src ? images[src] : images.primal} alt="" className={styles.imgDiet}/>
-                        )
-                    })}
+                    {recipe.diets.map(diet => <p className={styles.diet}>{diet}</p>)}
                 </div>         
             </div> 
              
