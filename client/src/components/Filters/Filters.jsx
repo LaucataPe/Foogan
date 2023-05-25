@@ -42,7 +42,6 @@ function Filters() {
                     <option value="db">My recipes</option>
                 </select>
                 <SearchBar/>
-                <button onClick={() => dispatch(resetFilters())} className={styles.reset}>🗑</button>
             </div>
 
             <div className={styles.orders}>

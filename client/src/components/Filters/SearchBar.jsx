@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {searchRecipe} from '../../redux/actions'
+import {searchRecipe, resetFilters} from '../../redux/actions'
 import styles from './Filters.module.css'
 
 export default function SearchBar() {
@@ -16,11 +16,20 @@ export default function SearchBar() {
     e.preventDefault()
     dispatch(searchRecipe(title))
   }
+
+  const handleReset = () =>{
+    dispatch(resetFilters())
+    setTitle('')
+  }
   
   return (
-    <div className={styles.search}>
-      <input type="search" value={title} onChange={handleChange} className={styles.bar} placeholder='Write a name...'/>
-      <Link to='/home'><button onClick={(e) => {handleAdd(e)}} className={styles.button}>Search</button></Link>
-    </div>
+    <>
+      <div className={styles.search}>
+        <input type="search" value={title} onChange={handleChange} className={styles.bar} placeholder='Write a name...'/>
+        <Link to='/home'><button onClick={(e) => {handleAdd(e)}} className={styles.button}>Search</button></Link>
+      </div>
+      <button onClick={handleReset} className={styles.reset}>🗑</button>
+    </>
+    
   );
 }
