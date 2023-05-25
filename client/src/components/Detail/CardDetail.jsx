@@ -9,6 +9,7 @@ function CardDetail() {
     const { id } = useParams();
     const {search} = useLocation();
     const [recipe, setRecipe] = useState({});
+    const [error, setError] = useState({});
 
     useEffect(() =>{
         const getRecipe = async(id) =>{
@@ -17,8 +18,7 @@ function CardDetail() {
                 const data = await response.data;
                 return setRecipe(data);
             } catch (error) {
-                console.log(error)  
-                alert('The recipe does not exists')
+                setError({error: error.message})
             }
         }
         getRecipe(id)
@@ -28,6 +28,7 @@ function CardDetail() {
 
     return(
         <>
+        {error.error ? <div className={styles.error}>{error.error}</div> : ''}
         <Link to='/home'><button className={styles.back}>{'<'} Back</button></Link>
         <h2 className={styles.title}>{recipe.title}</h2>
         <h5 className={styles.healthScore}> <img src={images.star} alt="Star"/> {recipe.healthScore}</h5>

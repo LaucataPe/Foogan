@@ -65,9 +65,9 @@
 .edit{
     cursor: pointer;
     position: absolute;
-    right: 10px;
-    bottom: 40%; 
-    height: 25px;  
+    right: 5px;
+    bottom: 35%; 
+    height: 35px;  
     background-color: #FFF; 
     border-radius: 100%;
 }

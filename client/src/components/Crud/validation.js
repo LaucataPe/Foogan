@@ -10,7 +10,7 @@
 
     if (inputs.healthScore < 10) errors.healthScore = "Health Score can not be 0" 
 
-    if (!inputs.image) errors.image = "Select an image!"
+    if (!inputs.image) errors.image = "Select an image! (.png, .jpg, .jpeg)"
 
     if (inputs.diets.length < 1) errors.diets = "Select almost one diet!" 
 

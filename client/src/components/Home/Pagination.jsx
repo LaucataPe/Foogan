@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Card from '../Card/Card'
 import styles from './Home.module.css'
 
-function Pagination({recipes, loading}) {
+function Pagination({recipes}) {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [perPage, setperPage] = useState(9)
@@ -38,7 +38,7 @@ function Pagination({recipes, loading}) {
     return(
         <>
         {find === false ? <h2 className={styles.message}>Sorry! The recipe you were looking for does not exist</h2> : ''}
-        <Card recipes={currentRecipes} loading={loading}/>
+        <Card recipes={currentRecipes}/>
         <div className={styles.pagination}>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={(event) => onSpecificPage(event)} value='First'>{'<<'}</button>
             <button disabled={currentPage === 1 || currentPage < 1} onClick={onPreviusPage}>{'<'}</button>

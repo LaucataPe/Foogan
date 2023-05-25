@@ -1,10 +1,11 @@
-import {GET_RECIPES,GET_DIETS, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS, ORDER, RESET} from "./action_types"
+import {GET_RECIPES,GET_DIETS, FILTER_ORIGIN, SEARCH_RECIPE, FILTER_DIETS, ORDER, RESET, GET_ERRORS} from "./action_types"
 
 const initialState = {
     recipes: [],
-    filteredRecipes: [] ,// Nuevo estado para almacenar los resultados filtrados
+    filteredRecipes: [] ,// New state to store the filtered recipes
     allRecipes: [],
-    diets: []
+    diets: [], 
+    errors: ''
   };
 
 const reducer = (state = initialState, action) => {
@@ -94,6 +95,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 recipes: state.allRecipes,
                 filteredRecipes: []
+            };
+            case GET_ERRORS:
+            return {
+                ...state,
+                errors: { ...state.errors,  ...action.payload}
             };
         default:
             return state

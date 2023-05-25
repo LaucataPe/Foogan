@@ -15,12 +15,10 @@ function Card({recipes}) {
                 dispatch(getAllRecipes())
                 return alert('The recipe was deleted')
             } catch (error) {
-                console.log(error)  
                 alert(error.response.data)
             }
         } 
     }
-    console.log(recipes);
     return(
         <div className={styles.container}>
         {recipes.map( recipe =>(

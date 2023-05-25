@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllRecipes } from "../../redux/actions";
 import styles from './Home.module.css'
@@ -9,18 +9,16 @@ import Pagination from './Pagination'
 import Filters from '../Filters/Filters'
 
 function Home() {
-    const [loading, setLoading] = useState(false)
     const recipes = useSelector((state) => state.recipes)
     const allRecipes = useSelector((state) => state.allRecipes)
+    const recipesErrors = useSelector((state) => state.errors)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setLoading(false)
         if(allRecipes.length === 0)dispatch(getAllRecipes())
-        setLoading(true)
     }, [])
 
-       
+       console.log(recipesErrors);
     return(
         <>
         <div className={styles.home}>
@@ -30,8 +28,10 @@ function Home() {
             </div>
             <img src={images.home} alt="" />
         </div>
+        {recipesErrors.diets ? <div className={styles.error}>Sorry! {recipesErrors.diets} in Diets</div> : ''}
         <Filters />
-        <Pagination recipes={recipes} loading={loading}/>
+        {recipesErrors.recipes ? <div className={styles.error}>Sorry! {recipesErrors.recipes} in Recipes</div> : ''}
+        <Pagination recipes={recipes}/>
         </>
     )
 }

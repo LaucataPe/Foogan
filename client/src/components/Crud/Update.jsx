@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {validate} from './validation';
+import { useDispatch} from 'react-redux'
+import { getAllRecipes } from "../../redux/actions";
 
 /*Styles*/
 import styles from './Create.module.css'
@@ -12,6 +14,7 @@ function Create() {
     const [errors, setErrors] = useState({})
     const [diets, setDiets] = useState([]); 
 
+    const dispatch = useDispatch()
     const navigate = useNavigate();
     const {id} = useParams()
 
@@ -104,14 +107,15 @@ function Create() {
                 let data = response.data;
                 if(data){
                     navigate('/home')
+                    dispatch(getAllRecipes())
                     return alert('Your recipe was updated correctly')
                 } 
              } catch (error) {
-              console.log(error);  
+                return setErrors({errorUpdate: error.message})  
              }
             setInput({})
         }else{
-            return alert('The are errors!')
+            return alert('The are errors in the form!')
         }
       }
     
@@ -122,9 +126,10 @@ function Create() {
             <img src={images.update} alt='Vegan food' />
             <form onSubmit={handleSubmit}>
                 <h1 className={styles.title}>Updating recipe</h1>
+                {errors.errorUpdate ? <p className={styles.errors}><strong>{errors.errorUpdate}</strong></p> : '' }
                 <label>Title</label>
                 <input value={input.title} onChange={handleInputs} type="text" name='title' /><br />
-                {errors.title !== '' ? <p className={styles.errors}><strong>{errors.title}</strong></p> : <p></p> }
+                {errors.title !== '' ? <p className={styles.errors}><strong>{errors.title}</strong></p> : '' }
 
                 <label>Summary</label>
                 <textarea value={input.summary} onChange={handleInputs} name="summary"

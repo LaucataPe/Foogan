@@ -3,12 +3,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {validate} from './validation';
 import { useDispatch} from 'react-redux'
+import { getAllRecipes } from "../../redux/actions";
 
 /*Styles*/
 import images from '../../img/index'
 import styles from './Create.module.css'
-
-import { getAllRecipes } from "../../redux/actions";
 
 function Create() {
     const [input, setInput] = useState({
@@ -51,13 +50,15 @@ function Create() {
 
     const handleImage = (e) =>{
         const file = e.target.files[0];
-        setFileToBase(file);
-        console.log(file);
+        if(file){
+            setFileToBase(file);
+            console.log(file);
 
-        setErrors(validate({
-            ...input,
-            [e.target.name]: e.target.files[0],
-        }))
+            setErrors(validate({
+                ...input,
+                [e.target.name]: e.target.files[0],
+            }))
+        }
     }
 
     const setFileToBase = (file) =>{
@@ -117,9 +118,9 @@ function Create() {
                 } 
              } catch (error) {
               if (error.response.data.includes('unicidad')) {
-                return setErrors({errorEnvio: 'The title of the current recipe already exists!'})
+                return setErrors({uniqueTitle: 'The title of the current recipe already exists!'})
               }else{
-                return alert(error.response.data)
+                return setErrors({errorEnvio: error.message})
               }
              }
             setInput({
@@ -142,10 +143,11 @@ function Create() {
             <img src={images.create} alt='Vegan food' />
             <form onSubmit={handleSubmit}>
             <h1 className={styles.title}>Create your own recipe</h1>
+                {errors.errorEnvio ? <p className={styles.errors}><strong>{errors.errorEnvio}</strong></p> : <p></p> }
                 <label>Title</label><br/>
                 <input value={input.title} onChange={handleInputs} type="text" name='title' placeholder='Write a title...' /><br />
                 {errors.title !== '' ? <p className={styles.errors}><strong>{errors.title}</strong></p> : <p></p> }
-                {errors.errorEnvio ? <p className={styles.errors}><strong>{errors.errorEnvio}</strong></p> : <p></p> }
+                {errors.uniqueTitle ? <p className={styles.errors}><strong>{errors.uniqueTitle}</strong></p> : <p></p> }
                 
                 <label>Summary</label><br/>
                 <textarea value={input.summary} onChange={handleInputs} name="summary" placeholder='Add a bit desription of the recipe...'

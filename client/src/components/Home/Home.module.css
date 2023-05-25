@@ -1,3 +1,16 @@
+.error{
+    background-color: rgba(255, 0, 0, 0.244);
+    margin: 10px;
+    width: 300px;
+    padding: 5px;
+    text-align: center;
+    color: #ff0000;
+    font-weight: 800;
+    border-radius: 1rem;
+    border: 1px solid red;
+}
+
+
 .title{
     text-transform: uppercase;
 }
@@ -41,6 +54,7 @@
     height: 25px; 
     align-items: center;   
     justify-content: center;
+    margin-top: 20px;
 }
 
 .pagination h3{
